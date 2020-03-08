@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
 
 import requests
 import re
@@ -11,8 +6,6 @@ import json
 import glob
 import pickle
 
-
-# In[ ]:
 
 
 def getPMIDs(query_term):
@@ -44,12 +37,6 @@ def getPMIDs(query_term):
         print('Requests has failed with error', response.status_code)
         
     return pmids
-            
-                
-        
-
-
-# In[ ]:
 
 
 def getAbstracts(pmids):
@@ -79,9 +66,6 @@ def getAbstracts(pmids):
         #progress check
         print(k)
     return corpus
-
-
-# In[ ]:
 
 
 search_term = 'peripheral blood mononuclear cells'
