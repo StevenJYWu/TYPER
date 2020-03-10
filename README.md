@@ -1,1 +1,13 @@
 # TYPEr
+======
+BRIEF DESCRIPTION
+
+## Environment
+
+## Installation
+
+## Usage 
+
+DOCUMENTATION/INFORMATION ABOUT THE PACKAGE/MODULES/FUNCTIONS
+
+======
