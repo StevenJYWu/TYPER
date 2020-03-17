@@ -13,8 +13,7 @@ import pandas as pd
 import itertools
 
 def is_number(s):
-    '''tests if a string can be converted in a number
-    '''
+    '''tests if a string can be converted in a number'''
     try:
         float(s)
         return True
@@ -70,7 +69,7 @@ def getAbstracts(pmids, dbpath):
     pmids = {i:'' for i in pmids}
 
     corpus = []
-    jsons = glob.glob((dbpath + '*.json'))
+    jsons = glob.glob((dbpath + '/*.json'))
     for k, js in enumerate(jsons):
         file = open(js, 'r')
         data = [json.loads(line) for line in file]
@@ -319,6 +318,28 @@ def get_sim_scores(w2v_model, key, cell_types, bernID):
 
 
 def main():
+    # parse arguments
+    parser = argparse.ArgumentParser(description='A program to mine open source\
+                research literature from pubmed. Generic use is to query a cell\
+                type and the program returns celltype-gene associations based\
+                off of word embeddings. All output will be written to a result \
+                file. The raw corpus (not preprocessed), trained word2vec model,\
+                and celltype-gene similarity scores will be stored there.')
+    parser.add_argument('-q', '--Query', help='General Tissue/CellType of Interest',
+                        dest='query', required=True)
+    parser.add_argument('-d', '--Database', help='Path to location of database \
+                        that stores named entity recognized articles. Reference:\
+                        https://github.com/dmis-lab/bern',
+                        dest='path', required=True)
+    parser.add_argument('-g', '--GeneIDs', help='Path of location to BERN-entity \
+                        IDs for genes', dest='id', required=True)
+    parser.add_argument('-k', '--Celltype', nargs='+',
+            help='A list of Keys to look up in the word embedding model.\
+                 Similarity scores are generated between these keys and every\
+                 gene.', dest='ct', required=True)
+    args = parser.parse_args()
+
+    # get PMIDs
     pmids = getPMIDs(args.query)
     corpus = getAbstracts(pmids, args.path)
 
@@ -358,26 +379,5 @@ def main():
     with open('result/w2v_ct.scores', 'wb') as filehandle:
         pickle.dump(scores, filehandle)
 
-
-parser = argparse.ArgumentParser(description='A program to mine open source\
-            research literature from pubmed. Generic use is to query a cell\
-            type and the program returns celltype-gene associations based\
-            off of word embeddings. All output will be written to a result \
-            file. The raw corpus (not preprocessed), trained word2vec model,\
-            and celltype-gene similarity scores will be stored there.')
-parser.add_argument('-q', '--Query', help='General Tissue/CellType of Interest',
-                    dest='query', required=True)
-parser.add_argument('-d', '--Database', help='Path to location of database that\
-                    stores named entity recognized articles. Reference:\
-                    https://github.com/dmis-lab/bern',
-                    dest='path', required=True)
-parser.add_argument('-g', '--GeneIDs', help='Path of location to BERN-entity \
-                    IDs for genes', dest='id', required=True)
-parser.add_argument('-k', '--Celltype', nargs='+',
-        help='A list of Keys to look up in the word embedding model.\
-             Similarity scores are generated between these keys and every\
-             gene.', dest='ct', required=True)
-args = parser.parse_args()
-
-main()
-
+if __name__ == "__main__":
+    main()
