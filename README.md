@@ -1,4 +1,29 @@
 # TYPEr
+
+```
+├── Documentation
+├── LICENSE
+├── README.md
+├── TYPEr
+│   ├── __init__.py
+│   ├── core.py
+│   ├── gene2vec.py
+│   ├── tests
+│   │   └── test_gene2vec.py
+│   └── utils.py
+├── docs
+│   ├── CHEME\ 545_546\ Technical\ Review.pdf
+│   ├── Proof_of_Concept.ipynb
+│   ├── component_specifications.md
+│   └── finalpresentation.pdf
+├── examples
+│   └── Demo.ipynb
+└── requirements.txt
+
+```
+
+
+
 ======
 Usage:
 `python gene2vec.py: -h`
@@ -25,7 +50,7 @@ optional arguments:
                         Similarity scores are generated between these keys and
                         every gene.
                         
-````
+```
                         
 BRIEF DESCRIPTION
 
