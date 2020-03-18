@@ -54,9 +54,8 @@ pip3 install -r requirements.txt --user
 
 * Usage:
 
-```python gene2vec.py: -h
-```
-
+`python gene2vec.py: -h
+`
 
 ```
 usage: gene2vec.py [-h] -q QUERY -d PATH -g ID -k CT [CT ...]
