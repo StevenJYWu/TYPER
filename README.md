@@ -1,11 +1,28 @@
-# TYPEr
+![test image size](https://images-na.ssl-images-amazon.com/images/I/71JDzraloRL._AC_SY355_.jpg)
+## TYPER 
 
-* Clone this Repo
-```
-cd
-git clone https://github.com/StevenJYWu/TYPER.git
-```
+---
+This package's purpose is to generate celltype-gene association scores. The scores can then be uesd to do whatever downstream task the user is interested in. For example, under /examples we provide a demo.iypnb that takes you through one potential use of these score. In our demo, we utilize these associations to annotate single cell RNA-sequencing data. 
 
+
+## Software Dependencies
+---
+
+* Python3
+* See requirements.txt
+
+## Data Dependencies 
+---
+
+* TYPER is dependent on an algorithm called BERN, it's a [Neural Named Entity Recognition and Multi-Type Normalization Tool for Biomedical Text Mining](https://bern.korea.ac.kr/). 
+    
+    * BERN is to computationally expensive to run on a local CPU, so for the purpose of this project we took advantage of the fact that they already applied their algorithm to all 20 million articles availabe in pubmed. The database reference is required to run our package and can be [downloaded here](https://drive.google.com/open?id=14YrlOGd1NdDn0XD-Yat4bbq3lRv1EyqR).
+    
+* BERN applies a NER algorithm and replaces redundent terms in the corpus with a concept unique identifier (CUI). A CUI-list annotation is necessary as well and can be [found here](https://drive.google.com/open?id=1KgJPBYB8D4_hN7wbiu0XOOM-lQdV8EgP).
+
+
+## Organization of the Project
+---
 
 ```
 ├── Documentation
@@ -29,13 +46,30 @@ git clone https://github.com/StevenJYWu/TYPER.git
 
 ```
 
+## Getting Started
+----
+
+* Clone this Repo
+```
+cd
+git clone https://github.com/StevenJYWu/TYPER.git
+```
+
+* Install python packages
+```
+pip3 install -r requirements.txt --user
+```
+
+* Install Data Dependencies illustrated above
+
+* Usage:
+
+```python gene2vec.py: -h
+```
 
 
-======
-Usage:
-`python gene2vec.py: -h`
-
-```usage: gene2vec.py [-h] -q QUERY -d PATH -g ID -k CT [CT ...]
+```
+usage: gene2vec.py [-h] -q QUERY -d PATH -g ID -k CT [CT ...]
 
 A program to mine open source research literature from pubmed. Generic use is
 to query a cell type and the program returns celltype-gene associations based
@@ -58,13 +92,3 @@ optional arguments:
                         every gene.
                         
 ```
-                        
-BRIEF DESCRIPTION
-
-## Environment
-
-## Installation
-
-## Usage 
-
-DOCUMENTATION/INFORMATION ABOUT THE PACKAGE/MODULES/FUNCTIONS
