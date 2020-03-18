@@ -3,8 +3,7 @@
 Usage 
 `python gene2vec.py -h`
 
-`
-usage: gene2vec.py [-h] -q QUERY -d PATH -g ID -k CT [CT ...]
+`usage: gene2vec.py [-h] -q QUERY -d PATH -g ID -k CT [CT ...]
 
 A program to mine open source research literature from pubmed. Generic use is
 to query a cell type and the program returns celltype-gene associations based
@@ -24,8 +23,7 @@ optional arguments:
   -k CT [CT ...], --Celltype CT [CT ...]
                         A list of Keys to look up in the word embedding model.
                         Similarity scores are generated between these keys and
-                        every gene.
-`
+                        every gene.`
 BRIEF DESCRIPTION
 
 ## Environment
