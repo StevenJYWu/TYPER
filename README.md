@@ -1,4 +1,4 @@
-![test image size](https://images-na.ssl-images-amazon.com/images/I/71JDzraloRL._AC_SY355_.jpg = 250x250 
+![test image size](https://images-na.ssl-images-amazon.com/images/I/71JDzraloRL._AC_SY355_.jpg 
 ## TYPER 
 
 ---
