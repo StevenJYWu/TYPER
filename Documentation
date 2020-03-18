@@ -1,0 +1,6 @@
+Chad is a cancer biologist that works heavily on performing and analysing RNA-seq experiments. 
+Brad is a scientist interested in analysing RNA-seq data for the first time. 
+
+Chad and Brad will load in their raw RNA-seq data. Next, they will load in scores from gene2vec. Fianlly, they will classify individual single cells and vizualize the results using UMAP.
+
+Using these celltype-gene word associations, both Brad and Chad will integrate biological domain knowledge and data-driven discovery to identify new cell-types.
