@@ -25,16 +25,17 @@ This package's purpose is to generate celltype-gene association scores. The scor
 │   ├── __init__.py
 │   ├── core.py
 │   ├── gene2vec.py
-│   ├── tests
-│   │   └── test_gene2vec.py
-│   └── utils.py
+│   └── tests
+│       └── test_gene2vec.py
 ├── docs
 │   ├── CHEME\ 545_546\ Technical\ Review.pdf
 │   ├── Proof_of_Concept.ipynb
+│   ├── Untitled.ipynb
 │   ├── component_specifications.md
 │   └── finalpresentation.pdf
 ├── examples
-│   └── Demo.ipynb
+│   ├── demo.ipynb
+│   └── utils.py
 └── requirements.txt
 
 ```
