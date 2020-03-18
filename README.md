@@ -1,4 +1,4 @@
-![test image size](https://images-na.ssl-images-amazon.com/images/I/71JDzraloRL._AC_SY355_.jpg)
+![test image size](https://images-na.ssl-images-amazon.com/images/I/71JDzraloRL._AC_SY355_.jpg = 250x250 
 ## TYPER 
 
 ---
@@ -64,7 +64,9 @@ pip3 install -r requirements.txt --user
 
 * Usage:
 
-`python gene2vec.py: -h`
+```python gene2vec.py: -h
+```
+
 
 ```
 usage: gene2vec.py [-h] -q QUERY -d PATH -g ID -k CT [CT ...]
