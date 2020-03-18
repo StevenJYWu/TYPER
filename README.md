@@ -1,5 +1,12 @@
 # TYPEr
 
+* Clone this Repo
+```
+cd
+git clone https://github.com/StevenJYWu/TYPER.git
+```
+
+
 ```
 ├── Documentation
 ├── LICENSE
