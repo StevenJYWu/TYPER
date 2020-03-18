@@ -1,19 +1,13 @@
-![test image size](https://images-na.ssl-images-amazon.com/images/I/71JDzraloRL._AC_SY355_.jpg 
+![test image size](https://images-na.ssl-images-amazon.com/images/I/71JDzraloRL._AC_SY355_.jpg = 250x250 
 ## TYPER 
-
----
 This package's purpose is to generate celltype-gene association scores. The scores can then be uesd to do whatever downstream task the user is interested in. For example, under /examples we provide a demo.iypnb that takes you through one potential use of these score. In our demo, we utilize these associations to annotate single cell RNA-sequencing data. 
 
 
 ## Software Dependencies
----
-
 * Python3
 * See requirements.txt
 
 ## Data Dependencies 
----
-
 * TYPER is dependent on an algorithm called BERN, it's a [Neural Named Entity Recognition and Multi-Type Normalization Tool for Biomedical Text Mining](https://bern.korea.ac.kr/). 
     
     * BERN is to computationally expensive to run on a local CPU, so for the purpose of this project we took advantage of the fact that they already applied their algorithm to all 20 million articles availabe in pubmed. The database reference is required to run our package and can be [downloaded here](https://drive.google.com/open?id=14YrlOGd1NdDn0XD-Yat4bbq3lRv1EyqR).
@@ -22,8 +16,6 @@ This package's purpose is to generate celltype-gene association scores. The scor
 
 
 ## Organization of the Project
----
-
 ```
 ├── Documentation
 ├── LICENSE
@@ -47,8 +39,6 @@ This package's purpose is to generate celltype-gene association scores. The scor
 ```
 
 ## Getting Started
-----
-
 * Clone this Repo
 ```
 cd
