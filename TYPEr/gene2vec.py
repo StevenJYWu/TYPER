@@ -12,6 +12,7 @@ import os
 import pandas as pd
 import itertools
 
+
 def is_number(s):
     '''tests if a string can be converted in a number'''
     try:
@@ -33,11 +34,12 @@ def getPMIDs(query_term):
     '''
 
     pmids = []
-    url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term='
+    url = 'https://eutils.ncbi.nlm.nih.gov/entrez/\
+            eutils/esearch.fcgi?db=pubmed&term='
     # max number of PMIDs
     params = {'retMax': 1000000}
     # replace whitespaces with +
-    query_term = re.sub('\s+', '+', query_term)
+    query_term = re.sub(r'\s+', '+', query_term)
 
     response = requests.get(url=(url + query_term), params=params)
     if response.status_code == 200:
@@ -54,8 +56,10 @@ def getPMIDs(query_term):
 
 def getAbstracts(pmids, dbpath):
     '''Get BERN bioNER tagged abstracts from PMID
-    Dependencies: The whole PUBMED database with BERN annotation downloaded from https://bern.korea.ac.kr/
-        -Stored on my local drive under: /Users/sjwu/nlp_CellMarkers/data/2019_merged_json_fixed
+    Dependencies: The whole PUBMED database with BERN annotation\
+    downloaded from https://bern.korea.ac.kr/
+        -Stored on my local drive under: \
+        /Users/sjwu/nlp_CellMarkers/data/2019_merged_json_fixed
 
     *One caveat is that this database isn't up to date. Last updated in 08/2019
 
@@ -66,7 +70,7 @@ def getAbstracts(pmids, dbpath):
     Return:
     corpus: list, of dictionaries'''
     # convert pmids to dict for faster lookup
-    pmids = {i:'' for i in pmids}
+    pmids = {i: '' for i in pmids}
 
     corpus = []
     jsons = glob.glob((dbpath + '/*.json'))
@@ -101,7 +105,8 @@ def process_PMIDabstracts(pmid_Abstracts):
     corpus = {}
     for k, ab in enumerate(pmid_Abstracts):
         key = ab['pmid']
-        text = list(ab['title']) + [' '] + list(ab['abstract'])
+        text = list(ab['title']) + [' '] \
+            + list(ab['abstract'])
         # check if abstract is empty
         if len(ab['abstract']) == 0:
             continue
@@ -128,7 +133,7 @@ def process_PMIDabstracts(pmid_Abstracts):
                 text[(ner['start'] + 1)] = str(ner['id'])
 
         # remove empty whitespace from filling in NER-IDs
-        corpus[key] = re.sub('\s+', ' ', ''.join(text)).strip()
+        corpus[key] = re.sub(r'\s+', ' ', ''.join(text)).strip()
 
     return corpus
 
@@ -166,7 +171,8 @@ def preprocess(corpora):
                     tokenize.pop(ind)
 
         # filter tokens to remove stopwords
-        filtered_tokens = [token for token in tokenize if not token in stop_words]
+        filtered_tokens = [token for token in tokenize
+                           if token not in stop_words]
         filtered_tokens = list(filter(None, filtered_tokens))
         # remove small corpuses from dict
         if len(tokenize) > 24:
@@ -199,8 +205,10 @@ def train_word2vec(corpus, feature_size=200,
     default settings'''
     print(negative)
     w2v_model = word2vec.Word2Vec(corpus, size=feature_size,
-                                  window=window_context, min_count=min_word_count,
-                                  iter=iterations, sg=sg, negative=negative)
+                                  window=window_context,
+                                  min_count=min_word_count,
+                                  iter=iterations, sg=sg,
+                                  negative=negative)
     return w2v_model
 
 
@@ -302,7 +310,7 @@ def get_sim_scores(w2v_model, key, cell_types, bernID):
         words = tup[0].split('_')
         for word in words:
             isnumber = is_number(word)
-            if (is_number(word) is True) and (word not in dict_tmp):
+            if (isnumber is True) and (word not in dict_tmp):
                 dict_tmp[word] = tup[1]
 
     scores = []
@@ -319,24 +327,27 @@ def get_sim_scores(w2v_model, key, cell_types, bernID):
 
 def main():
     # parse arguments
-    parser = argparse.ArgumentParser(description='A program to mine open source\
-                research literature from pubmed. Generic use is to query a cell\
-                type and the program returns celltype-gene associations based\
-                off of word embeddings. All output will be written to a result \
-                file. The raw corpus (not preprocessed), trained word2vec model,\
-                and celltype-gene similarity scores will be stored there.')
-    parser.add_argument('-q', '--Query', help='General Tissue/CellType of Interest',
+    parser = argparse.ArgumentParser(description='A program to mine open\
+    source research literature from pubmed. Generic use is to query\
+    a celltype and the program returns celltype-gene associations based\
+    off of word embeddings. All output will be written to a result \
+    file. The raw corpus (not preprocessed), trained word2vec model,\
+    and celltype-gene similarity scores will be stored there.')
+    parser.add_argument('-q', '--Query',
+                        help='General Tissue/CellType of Interest',
                         dest='query', required=True)
-    parser.add_argument('-d', '--Database', help='Path to location of database \
-                        that stores named entity recognized articles. Reference:\
-                        https://github.com/dmis-lab/bern',
+    parser.add_argument('-d', '--Database',
+                        help='Path to location of database \
+                        that stores named entity recognized articles. \
+                        Reference: https://github.com/dmis-lab/bern',
                         dest='path', required=True)
     parser.add_argument('-g', '--GeneIDs', help='Path of location to BERN-entity \
                         IDs for genes', dest='id', required=True)
     parser.add_argument('-k', '--Celltype', nargs='+',
-            help='A list of Keys to look up in the word embedding model.\
-                 Similarity scores are generated between these keys and every\
-                 gene.', dest='ct', required=True)
+                        help='A list of Keys to look up in the \
+                        word embedding model. Similarity scores are \
+                        generated between these keys and every\
+                        gene.', dest='ct', required=True)
     args = parser.parse_args()
 
     # get PMIDs
@@ -378,6 +389,7 @@ def main():
 
     with open('result/w2v_ct.scores', 'wb') as filehandle:
         pickle.dump(scores, filehandle)
+
 
 if __name__ == "__main__":
     main()
