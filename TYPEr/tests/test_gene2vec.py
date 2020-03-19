@@ -16,6 +16,7 @@ def test_is_number():
     float"""
     assert gene2vec.is_number("4324"), "float checker incorrect"
 
+
 def test_getPMIDs():
     """Test whether or not we're correctly retreiving the pubmed ID numbers
     for abstracts based off of a search term we're interested in"""
@@ -24,12 +25,14 @@ def test_getPMIDs():
     results = gene2vec.getPMIDs(query)
     assert len(results) == nresults, "PMIDs not returned properly"
 
+
 def test_getAbstracts():
     """Test whether or we're properly retrieving abstracts from a PMID search
     """
     corpus = gene2vec.getAbstracts(pmids, "test_db")
     # check if the correct number of abstracts is properly retrieved
     assert len(corpus) == 4935, "abstracts not properly retreived"
+
 
 def test_process_PMIDabstracts():
     """Test to see integration of NER (named entity recognition) of words in
@@ -42,24 +45,27 @@ def test_process_PMIDabstracts():
     first_3terms = ' '.join(ls_strings[0:3])
     assert first_3terms == string_match, "Abstracts processed incorrectly"
 
+
 def test_preprocess():
     """Test if we're preprocessing our corpus correctly. Short abstracts are
     removed. See if it's functioning properly
     """
-    corpus = {0:'For writers, a random sentence can help them get their \
+    corpus = {0: 'For writers, a random sentence can help them get their \
                 creative juices flowing. Since the topic of the sentence is \
                 completely unknown, it forces the writer to be creative when \
                 the sentence appears. There are a number of different ways a \
                 writer can use the random sentence for creativity.',
-            1: 'THIS is a short sentence.'}
+              1: 'THIS is a short sentence.'}
 
     corpus_pre = gene2vec.preprocess(corpus)
-    assert len(corpus_pre[0]) == 26, "Corpus tokenized/preprocessed incorrectly"
+    assert len(corpus_pre[0]) == 26, \
+        "Corpus tokenized/preprocessed incorrectly"
     try:
         corpus_pre[1]
         assert False, "short abstracts less than 25 words not removed properly"
     except KeyError:
         assert True
+
 
 def test_phrase_corpus():
     """Test if we're properly generating phrases
@@ -70,14 +76,17 @@ def test_phrase_corpus():
                  "new york is worst than california",
                  "new york"]
     sentence_stream = [doc.split(" ") for doc in documents]
-    sentence_stream = gene2vec.phrase_corpus(sentence_stream, \
+    sentence_stream = gene2vec.phrase_corpus(sentence_stream,
                                              min_count=2, threshold=1)
-    assert sentence_stream[-1][0] == "new_york", "phraser isn't working properly"
+    assert sentence_stream[-1][0] == "new_york", \
+        "phraser isn't working properly"
+
 
 def test_train_word2vec():
     """unit testing a package library makes 0 sense
     """
     pass
+
 
 def test_bernID_to_genes():
     """Testing bernID_to_gene method. The function is written to handle
@@ -92,12 +101,14 @@ def test_bernID_to_genes():
     except KeyError:
         assert False, "bernIDs not loaded properly"
 
+
 def test_drop_embeddings():
     """This function is dependent on a w2v model. It just queries the model
     and drops keys that aren't relevant in our case all terms that aren't
     genes. Thus, there is no reason to unit test this function
     """
     pass
+
 
 def test_get_sim_scores():
     """This function is dependent on a w2v model. It just queries top_n word
@@ -106,4 +117,3 @@ def test_get_sim_scores():
     word embedding to all genes
     """
     pass
-
