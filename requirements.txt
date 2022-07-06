@@ -9,7 +9,7 @@ idna==2.9
 jmespath==0.9.5
 joblib==0.14.1
 llvmlite==0.31.0
-lxml==4.5.0
+lxml==4.9.1
 nltk==3.4.5
 numba==0.48.0
 numpy==1.18.1
